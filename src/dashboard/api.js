@@ -18,7 +18,14 @@ export async function adminFetch(path, { method = 'GET', body, token } = {}) {
     throw err
   }
 
-  const json = await res.json()
-  if (!json.success) throw new Error(json.error || 'Request failed')
+  let json
+  try {
+    const text = await res.text()
+    console.log(`[adminFetch] ${method} ${path} → ${res.status}`, text.slice(0, 500))
+    json = JSON.parse(text)
+  } catch (parseErr) {
+    throw new Error(`Server returned non-JSON response (HTTP ${res.status})`)
+  }
+  if (!json.success) throw new Error(json.error || `Request failed (HTTP ${res.status})`)
   return json.data
 }

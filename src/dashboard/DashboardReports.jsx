@@ -20,7 +20,7 @@ export default function DashboardReports() {
       const token = await getToken()
       const params = status !== 'ALL' ? `?status=${status}` : ''
       const result = await adminFetch(`/admin/reports${params}`, { token })
-      setReports(result)
+      setReports(Array.isArray(result) ? result : result.reports || [])
     } catch (e) {
       console.error(e)
     } finally {

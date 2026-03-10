@@ -19,7 +19,7 @@ export default function DashboardJobs() {
       const token = await getToken()
       const params = status !== 'ALL' ? `?status=${status}` : ''
       const result = await adminFetch(`/admin/jobs${params}`, { token })
-      setJobs(result)
+      setJobs(Array.isArray(result) ? result : result.jobs || [])
     } catch (e) {
       console.error(e)
       setJobs([])

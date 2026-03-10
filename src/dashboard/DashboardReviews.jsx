@@ -16,7 +16,7 @@ export default function DashboardReviews() {
     try {
       const token = await getToken()
       const result = await adminFetch(`/admin/reviews/flagged?maxRating=${maxRating}`, { token })
-      setReviews(result)
+      setReviews(Array.isArray(result) ? result : result.reviews || [])
     } catch (e) {
       console.error(e)
       setReviews([])
