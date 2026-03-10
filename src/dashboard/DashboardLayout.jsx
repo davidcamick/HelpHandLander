@@ -15,7 +15,7 @@ export default function DashboardLayout() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
       </div>
     )
@@ -23,7 +23,7 @@ export default function DashboardLayout() {
 
   if (!isSignedIn) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="bg-white rounded-2xl shadow-xl p-10 text-center max-w-sm">
           <Shield className="w-12 h-12 text-blue-600 mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">Admin Dashboard</h1>
@@ -39,9 +39,9 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="dashboard-layout flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
+      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col fixed inset-y-0 left-0 z-30">
         <div className="p-6 border-b border-gray-100">
           <div className="flex items-center gap-3">
             <Shield className="w-8 h-8 text-blue-600" />
@@ -81,7 +81,7 @@ export default function DashboardLayout() {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto ml-64">
         <div className="max-w-7xl mx-auto p-8">
           <Outlet />
         </div>

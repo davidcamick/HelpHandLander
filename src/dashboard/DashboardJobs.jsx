@@ -11,6 +11,7 @@ export default function DashboardJobs() {
   const [status, setStatus] = useState('ALL')
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState(null)
+  const [error, setError] = useState(null)
 
   const load = async () => {
     setLoading(true)
@@ -21,6 +22,8 @@ export default function DashboardJobs() {
       setJobs(result)
     } catch (e) {
       console.error(e)
+      setJobs([])
+      setError(e.message)
     } finally {
       setLoading(false)
     }
@@ -65,13 +68,20 @@ export default function DashboardJobs() {
         ))}
       </div>
 
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+          <p className="text-sm text-red-700 font-medium">Failed to load jobs</p>
+          <p className="text-xs text-red-500 mt-1">{error}</p>
+        </div>
+      )}
+
       {loading ? (
         <div className="space-y-3">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse" />
           ))}
         </div>
-      ) : !jobs.length ? (
+      ) : !jobs.length && !error ? (
         <div className="text-center py-16">
           <Briefcase className="w-8 h-8 text-gray-300 mx-auto mb-2" />
           <p className="text-gray-400">No jobs found</p>

@@ -9,6 +9,7 @@ export default function DashboardReviews() {
   const [maxRating, setMaxRating] = useState(1)
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState(null)
+  const [error, setError] = useState(null)
 
   const load = async () => {
     setLoading(true)
@@ -18,6 +19,8 @@ export default function DashboardReviews() {
       setReviews(result)
     } catch (e) {
       console.error(e)
+      setReviews([])
+      setError(e.message)
     } finally {
       setLoading(false)
     }
@@ -57,13 +60,20 @@ export default function DashboardReviews() {
         </div>
       </div>
 
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+          <p className="text-sm text-red-700 font-medium">Failed to load reviews</p>
+          <p className="text-xs text-red-500 mt-1">{error}</p>
+        </div>
+      )}
+
       {loading ? (
         <div className="space-y-3">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="h-20 bg-gray-100 rounded-xl animate-pulse" />
           ))}
         </div>
-      ) : !reviews.length ? (
+      ) : !reviews.length && !error ? (
         <div className="text-center py-16">
           <AlertTriangle className="w-8 h-8 text-green-400 mx-auto mb-2" />
           <p className="text-gray-400">No flagged reviews — looking good!</p>

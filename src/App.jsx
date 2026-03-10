@@ -17,6 +17,12 @@ function App() {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
+    // Add landing-page class to body for dark theme scoping
+    document.body.classList.add('landing-page')
+    return () => document.body.classList.remove('landing-page')
+  }, [])
+
+  useEffect(() => {
     // Short loading delay for cinematic entrance
     const timer = setTimeout(() => setLoaded(true), 300)
     return () => clearTimeout(timer)

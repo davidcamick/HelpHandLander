@@ -30,9 +30,15 @@ html {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #ffffff;
+  color: #1a1a2e;
+  overflow-x: hidden;
+}
+
+/* Dark theme only for the landing page */
+.landing-page {
   background: var(--brand-dark);
   color: #E2E8F0;
-  overflow-x: hidden;
 }
 
 /* ========================================
@@ -244,16 +250,43 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--brand-dark);
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.3);
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.landing-page ::-webkit-scrollbar-track {
+  background: var(--brand-dark);
+}
+
+.landing-page ::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+.landing-page ::-webkit-scrollbar-thumb:hover {
   background: rgba(59, 130, 246, 0.5);
+}
+
+/* ========================================
+   Dashboard-specific styles
+   ======================================== */
+
+.dashboard-layout {
+  background: #f8fafc;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+.dashboard-layout ::selection {
+  background: rgba(59, 130, 246, 0.2);
+  color: #1e293b;
 }
 
 /* ========================================
